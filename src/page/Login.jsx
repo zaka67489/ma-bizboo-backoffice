@@ -89,68 +89,71 @@ function App() {
     if (!isLoading)
         return (
             <div className="flex justify-center items-center h-screen">
-                <div className="container">
-                    <div className="bg-white dark:bg-dark-1 px-5 sm:px-8 py-8 rounded-md shadow-md xl:shadow-none w-full">
-                        <h2 className="font-bold text-2xl xl:text-3xl text-center xl:text-left font-display">
-                            เข้าสู่ระบบ Bizboo Master Manager
-                        </h2>
-                        <form className="mt-8" onSubmit={loginHandle}>
+    <div className="container">
+        {/* Centering the logo */}
+        <div className="flex justify-center my-8">
+            <img src="/img/logo.png" width={350} alt="Bizboo Master Manager Logo"/>
+        </div>
 
-                            {/* Input for Prefix */}
-                            
+        <div className="bg-white dark:bg-dark-1 px-5 sm:px-8 py-8 rounded-md shadow-md xl:shadow-none w-full">
+            <h2 className="font-bold text-2xl xl:text-3xl text-center xl:text-left font-display">
+                เข้าสู่ระบบ Bizboo Master Manager
+            </h2>
+            <form className="mt-8" onSubmit={loginHandle}>
 
-                            {/* Input for Mobilephone */}
-                            <div className="py-1">
-                                <label htmlFor="mobilephone" className="block text-gray-700 text-sm font-bold mb-2">
-                                   Username
-                                </label>
-                                <div className="input-group">
-                                    <input
-                                        className="rounded py-3 text-center px-4 form-control border-gray-300 block focus:outline-none w-full"
-                                        name="Username"
-                                        placeholder="Username"
-                                        type="text"
-                                        autoComplete="off"
-                                        value={mobilephone}
-                                        onChange={handleMobilephoneChange}
-                                        required
-                                    />
-                                </div>
-                            </div>
-
-                            {/* Input for PIN */}
-                            <div className="py-1">
-                                <label htmlFor="pin" className="block text-gray-700 text-sm font-bold mb-2">
-                                    Password
-                                </label>
-                                <div className="input-group">
-                                    <input
-                                        className="rounded py-3 text-center px-4 form-control border-gray-300 block focus:outline-none w-full"
-                                        name="Password"
-                                        placeholder="Password"
-                                        type="password"
-                                        autoComplete="off"
-                                        value={pin}
-                                        onChange={handlePinChange}
-                                        required
-                                    />
-                                </div>
-                            </div>
-
-                            {/* Submit Button */}
-                            <div className="mt-2 text-center">
-                                <button
-                                    type="submit"
-                                    className="btn btn-primary btn-elevated py-3 px-4 w-full font-display"
-                                    style={{ color: 'white' }}
-                                >
-                                    เข้าสู่ระบบ
-                                </button>
-                            </div>
-                        </form>
+                {/* Input for Username */}
+                <div className="py-1">
+                    <label htmlFor="mobilephone" className="block text-gray-700 text-sm font-bold mb-2">
+                        Username
+                    </label>
+                    <div className="input-group">
+                        <input
+                            className="rounded py-3 text-center px-4 form-control border-gray-300 block focus:outline-none w-full"
+                            name="Username"
+                            placeholder="Username"
+                            type="text"
+                            autoComplete="off"
+                            value={mobilephone}
+                            onChange={handleMobilephoneChange}
+                            required
+                        />
                     </div>
                 </div>
-            </div>
+
+                {/* Input for Password */}
+                <div className="py-1">
+                    <label htmlFor="pin" className="block text-gray-700 text-sm font-bold mb-2">
+                        Password
+                    </label>
+                    <div className="input-group">
+                        <input
+                            className="rounded py-3 text-center px-4 form-control border-gray-300 block focus:outline-none w-full"
+                            name="Password"
+                            placeholder="Password"
+                            type="password"
+                            autoComplete="off"
+                            value={pin}
+                            onChange={handlePinChange}
+                            required
+                        />
+                    </div>
+                </div>
+
+                {/* Submit Button */}
+                <div className="mt-2 text-center">
+                    <button
+                        type="submit"
+                        className="btn btn-primary btn-elevated py-3 px-4 w-full font-display"
+                        style={{ color: 'white' }}
+                    >
+                        เข้าสู่ระบบ
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
         )
 
     // return (
