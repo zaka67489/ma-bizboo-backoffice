@@ -38,51 +38,51 @@ function App() {
 
     const loginHandle = async (e) => {
         e.preventDefault();
-        try {
-            await axios.post(`${API}/staff/login`, { "mobilephone": mobilephone, "pin": pin, "prefix": prefix }).then(res => {
-                console.log('res:', res.data)
-                if (res.data.statusCode === 200) {
-                    localStorage.setItem('loggedInUser', JSON.stringify(res.data))
-                    const Toast = Swal.mixin({
-                        toast: true,
-                        position: "top-end",
-                        showConfirmButton: false,
-                        timer: 3000,
-                        timerProgressBar: true,
-                        didOpen: (toast) => {
-                            toast.onmouseenter = Swal.stopTimer;
-                            toast.onmouseleave = Swal.resumeTimer;
-                        }
-                    });
-                    Toast.fire({
-                        icon: "success",
-                        title: "Signed in successfully"
-                    });
-                    navigate("/dashboard")
-                } else {
-                    Swal.fire({
-                        position: "center",
-                        icon: "error",
-                        title: "ผิดพลาด",
-                        showConfirmButton: false,
-                        timer: 1500
-                    });
-                }
+        // try {
+        //     await axios.post(`${API}/staff/login`, { "mobilephone": mobilephone, "pin": pin, "prefix": prefix }).then(res => {
+        //         console.log('res:', res.data)
+        //         if (res.data.statusCode === 200) {
+        //             localStorage.setItem('loggedInUser', JSON.stringify(res.data))
+        //             const Toast = Swal.mixin({
+        //                 toast: true,
+        //                 position: "top-end",
+        //                 showConfirmButton: false,
+        //                 timer: 3000,
+        //                 timerProgressBar: true,
+        //                 didOpen: (toast) => {
+        //                     toast.onmouseenter = Swal.stopTimer;
+        //                     toast.onmouseleave = Swal.resumeTimer;
+        //                 }
+        //             });
+        //             Toast.fire({
+        //                 icon: "success",
+        //                 title: "Signed in successfully"
+        //             });
+        //             navigate("/dashboard")
+        //         } else {
+        //             Swal.fire({
+        //                 position: "center",
+        //                 icon: "error",
+        //                 title: "ผิดพลาด",
+        //                 showConfirmButton: false,
+        //                 timer: 1500
+        //             });
+        //         }
 
-            })
-        } catch (error) {
-            console.log(error)
-            console.log(error.response.data.details)
-            Swal.fire({
-                position: "center",
-                icon: "error",
-                title: "ผิดพลาด",
-                text: error.response.data.details,
-                showConfirmButton: false,
-                timer: 1500
-            });
+        //     })
+        // } catch (error) {
+        //     console.log(error)
+        //     console.log(error.response.data.details)
+        //     Swal.fire({
+        //         position: "center",
+        //         icon: "error",
+        //         title: "ผิดพลาด",
+        //         text: error.response.data.details,
+        //         showConfirmButton: false,
+        //         timer: 1500
+        //     });
 
-        }
+        // }
         console.log('2')
     }
 
@@ -92,40 +92,23 @@ function App() {
                 <div className="container">
                     <div className="bg-white dark:bg-dark-1 px-5 sm:px-8 py-8 rounded-md shadow-md xl:shadow-none w-full">
                         <h2 className="font-bold text-2xl xl:text-3xl text-center xl:text-left font-display">
-                            เข้าสู่ระบบ
+                            เข้าสู่ระบบ Bizboo Master Manager
                         </h2>
                         <form className="mt-8" onSubmit={loginHandle}>
 
                             {/* Input for Prefix */}
-                            <div className="py-1">
-                                <label htmlFor="prefix" className="block text-gray-700 text-sm font-bold mb-2">
-                                    Prefix
-                                </label>
-                                <div className="input-group">
-                                    <input
-                                        className="rounded py-3 text-center px-4 form-control border-gray-300 block focus:outline-none w-full"
-                                        name="prefix"
-                                        placeholder="prefix"
-                                        type="text"
-                                        autoComplete="off"
-                                        value={prefix}
-                                        // disabled
-                                        onChange={handlePrefixChange}
-                                        required
-                                    />
-                                </div>
-                            </div>
+                            
 
                             {/* Input for Mobilephone */}
                             <div className="py-1">
                                 <label htmlFor="mobilephone" className="block text-gray-700 text-sm font-bold mb-2">
-                                    เบอร์โทรศัพท์มือถือ
+                                   Username
                                 </label>
                                 <div className="input-group">
                                     <input
                                         className="rounded py-3 text-center px-4 form-control border-gray-300 block focus:outline-none w-full"
-                                        name="mobilephone"
-                                        placeholder="เบอร์โทรศัพท์"
+                                        name="Username"
+                                        placeholder="Username"
                                         type="text"
                                         autoComplete="off"
                                         value={mobilephone}
@@ -138,13 +121,13 @@ function App() {
                             {/* Input for PIN */}
                             <div className="py-1">
                                 <label htmlFor="pin" className="block text-gray-700 text-sm font-bold mb-2">
-                                    รหัส PIN
+                                    Password
                                 </label>
                                 <div className="input-group">
                                     <input
                                         className="rounded py-3 text-center px-4 form-control border-gray-300 block focus:outline-none w-full"
-                                        name="pin"
-                                        placeholder="รหัส PIN"
+                                        name="Password"
+                                        placeholder="Password"
                                         type="password"
                                         autoComplete="off"
                                         value={pin}

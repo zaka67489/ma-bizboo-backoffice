@@ -6442,8 +6442,8 @@ select {
 }
 
 .usun,:root {
-    --color-primary-new: 10 146 53;
-    --color-primary: 10 146 53;
+    --color-primary-new: 0 0 88;
+    --color-primary: 0 0 88;
     --color-primary-light: 210 115 0;
     --color-primary-normal: 162 70 20;
     --color-primary-dark: 77 31 0;
