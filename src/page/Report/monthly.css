@@ -1,0 +1,15 @@
+/* เพิ่มกรอบและเงาให้ DatePicker */
+.custom-datepicker {
+    border: 1px solid #ccc;  /* กำหนดกรอบสีเทา */
+    padding: 8px;  /* ระยะห่างภายใน */
+    border-radius: 4px;  /* มุมโค้งมน */
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);  /* เงาเบาๆ */
+    width: 100%;
+    background-color: #fff;
+}
+
+.custom-datepicker:focus {
+    outline: none;  /* เอาเส้นขอบออกตอน focus */
+    border-color: #007bff;  /* กำหนดสีขอบตอน focus */
+    box-shadow: 0px 0px 5px rgba(0, 123, 255, 0.5);  /* เงาสีฟ้าตอน focus */
+}

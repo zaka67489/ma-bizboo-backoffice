@@ -1,0 +1,15 @@
+.input-group>.form-control {
+    z-index: 0!important
+}
+
+.dp__menu {
+    font-size: 12px!important
+}
+
+.dp__instance_calendar,.dp__preset_ranges {
+    padding: 8px
+}
+
+.scroller {
+    height: 100%
+}

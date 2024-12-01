@@ -1,0 +1,15 @@
+.job-done_max-height {
+    max-height: 600px
+}
+
+.backlist-crosswalk__bg {
+    background-image: linear-gradient(135deg,#253126 25%,#8ca58b 0,#8ca58b 50%,#253126 0,#253126 75%,#8ca58b 0,#8ca58b);
+    background-size: 56.57px 56.57px
+}
+
+.custom__line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden
+}

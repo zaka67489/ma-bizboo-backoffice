@@ -1,0 +1,8 @@
+.tom-select .ts-input {
+    min-height: 38px;
+}
+
+.error-input .tom-select .ts-input {
+    --tw-border-opacity: 1;
+    border-color: rgb(var(--color-danger)/var(--tw-border-opacity));
+}

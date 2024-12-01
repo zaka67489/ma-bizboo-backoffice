@@ -1,0 +1,20 @@
+.tom-select .ts-input {
+    min-height: 38px;
+}
+
+.error-input .tom-select .ts-input {
+    --tw-border-opacity: 1;
+    border-color: rgb(var(--color-danger)/var(--tw-border-opacity));
+}
+
+.Page-active {
+    border-color: rgb(28, 63, 170) !important;
+    background-color: rgb(28, 63, 170) !important;
+    color: rgb(255, 255, 255) !important;
+}
+
+.Page {
+    min-width: 22px !important;
+    width: auto !important;
+    padding: 4px !important;
+}

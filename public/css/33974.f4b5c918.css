@@ -1,0 +1,11 @@
+.Page-active {
+    border-color: rgb(28, 63, 170) !important;
+    background-color: rgb(28, 63, 170) !important;
+    color: rgb(255, 255, 255) !important;
+}
+
+.Page {
+    min-width: 22px !important;
+    width: auto !important;
+    padding: 4px !important;
+}
