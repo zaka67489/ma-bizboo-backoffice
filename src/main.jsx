@@ -32,8 +32,15 @@ import SettingsPage from "./page/Settings/Settings";
 // History
 import HistoryTopupPage from "./page/History/Topup";
 
+// Master
+import MasterListPage from "./page/Master/List";
+import MasterEditPage from "./page/Master/Edit/Edit";
+// import MemberEditPage from "./page/Member/Edit/Edit";
+
+
 import ErrorPage from "./error-page";
 import Layout from "./Layout";
+
 
 const root = createRoot(document.getElementById("root"));
 const App = () => {
@@ -48,6 +55,40 @@ const App = () => {
       path: "/",
       element: <Layout />, // ใช้ Layout ที่สร้างขึ้น
       children: [
+
+
+        {
+          path: "master",
+          children: [
+            {
+              path: "list",
+              element: <MasterListPage />,
+            },
+            {
+              path: "edit/:userid",
+              element: <MasterEditPage />,
+            },
+            // {
+            //   path: "recent",
+            //   element: <MemberRecentPage />,
+            // },
+            // {
+            //   path: "ranking",
+            //   element: <MemberRankingPage />,
+            // },
+            // {
+            //   path: "edit/:userid",
+            //   element: <MemberEditPage />,
+            // },
+          ],
+        },
+
+
+
+
+
+
+        // เก่า
         {
           path: "dashboard",
           element: <Dashboard />,

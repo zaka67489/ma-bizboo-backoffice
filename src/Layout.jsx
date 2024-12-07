@@ -711,9 +711,6 @@ const Layout = () => {
                                     className="w-23"
                                     src="/img/logo.png"
                                 />
-                                {/* <span className="xl:block text-white text-lg ml-3 uppercase">
-                                    99XBET
-                                </span> */}
                             </a>
                             <div className="side-nav__divider mt-6 mb-3" />
                             <ul>
@@ -748,6 +745,37 @@ const Layout = () => {
 
                                 <li>
                                     <div className="text-white text-xs font-display py-3">
+                                        จัดการเว็บมาสเตอร์
+                                    </div>
+                                    <a href="/master/list" className={`side-menu !pl-5 ${location.pathname === "/master/list" && 'side-menu--active'}`} >
+                                        <div className="side-menu__icon">
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                width="16px"
+                                                height="16px"
+                                                viewBox="0 0 24 24"
+                                                fill="none"
+                                                stroke="currentColor"
+                                                strokeWidth={2}
+                                                strokeLinecap="round"
+                                                strokeLinejoin="round"
+                                                className="feather feather-package"
+                                            >
+                                                <line x1="16.5" y1="9.4" x2="7.5" y2="4.21" />
+                                                <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
+                                                <polyline points="3.27 6.96 12 12.01 20.73 6.96" />
+                                                <line x1={12} y1="22.08" x2={12} y2={12} />
+                                            </svg>
+                                        </div>
+                                        <div className="side-menu__title">
+                                            <span className="font-display">รายการ เว็บมาสเตอร์</span>
+
+                                        </div>
+                                    </a>
+                                </li>
+
+                                {/* <li>
+                                    <div className="text-white text-xs font-display py-3">
                                         ข้อมูลการเงิน
                                     </div>
                                     <a href="/tx-job" className={`side-menu !pl-5 ${location.pathname === "/tx-job" && 'side-menu--active'}`} >
@@ -775,8 +803,9 @@ const Layout = () => {
 
                                         </div>
                                     </a>
-                                </li>
-                                <li>
+                                </li> */}
+
+                                {/* <li>
                                     <div className="text-white text-xs font-display py-3">
                                         จัดการธนาคาร
                                     </div>
@@ -805,9 +834,9 @@ const Layout = () => {
 
                                         </div>
                                     </a>
-                                </li>
-                                <li>
+                                </li> */}
 
+                                {/* <li>
                                     <a href="/transfer" className={`side-menu !pl-5 ${location.pathname === "/transfer" && 'side-menu--active'}`}>
                                         <div className="side-menu__icon">
                                             <svg
@@ -835,107 +864,9 @@ const Layout = () => {
 
                                         </div>
                                     </a>
-
-
-                                </li>
-                                {/* <li>
-
-                                    <a href="" className="side-menu !pl-5">
-                                        <div className="side-menu__icon">
-                                            <svg
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                width="16px"
-                                                height="16px"
-                                                viewBox="0 0 24 24"
-                                                fill="none"
-                                                stroke="currentColor"
-                                                strokeWidth={2}
-                                                strokeLinecap="round"
-                                                strokeLinejoin="round"
-                                                className="feather feather-clipboard"
-                                            >
-                                                <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2" />
-                                                <rect x={8} y={2} width={8} height={4} rx={1} ry={1} />
-                                            </svg>
-                                        </div>
-                                        <div className="side-menu__title">
-                                            <span className="font-display">ตรวจสอบสลิป</span>
-                                            <div className="side-menu__sub-icon">
-                                                <svg
-                                                    xmlns="http://www.w3.org/2000/svg"
-                                                    width="16px"
-                                                    height="16px"
-                                                    viewBox="0 0 24 24"
-                                                    fill="none"
-                                                    stroke="currentColor"
-                                                    strokeWidth={2}
-                                                    strokeLinecap="round"
-                                                    strokeLinejoin="round"
-                                                    className="feather feather-chevron-down"
-                                                >
-                                                    <polyline points="6 9 12 15 18 9" />
-                                                </svg>
-                                            </div>
-                                        </div>
-                                    </a>
-
-                                    <ul className="v-leave-active v-leave-to" style={{ display: "none" }}>
-                                        <li />
-                                        <li />
-                                        <li className="">
-                                            <a href="" className="side-menu side-menu--active">
-                                                <div className="side-menu__icon pl-1">
-                                                    <svg
-                                                        xmlns="http://www.w3.org/2000/svg"
-                                                        width="16px"
-                                                        height="16px"
-                                                        viewBox="0 0 24 24"
-                                                        fill="none"
-                                                        stroke="currentColor"
-                                                        strokeWidth={2}
-                                                        strokeLinecap="round"
-                                                        strokeLinejoin="round"
-                                                        className="feather feather-corner-down-right p-0.5 p-0.5"
-                                                    >
-                                                        <polyline points="15 10 20 15 15 20" />
-                                                        <path d="M4 4v7a4 4 0 0 0 4 4h12" />
-                                                    </svg>
-                                                </div>
-                                                <div className="side-menu__title">
-                                                    <span className="font-display">ธนาคาร</span>
-
-                                                </div>
-                                            </a>
-
-                                        </li>
-                                        <li className="">
-                                            <a href="" className="side-menu">
-                                                <div className="side-menu__icon pl-1">
-                                                    <svg
-                                                        xmlns="http://www.w3.org/2000/svg"
-                                                        width="16px"
-                                                        height="16px"
-                                                        viewBox="0 0 24 24"
-                                                        fill="none"
-                                                        stroke="currentColor"
-                                                        strokeWidth={2}
-                                                        strokeLinecap="round"
-                                                        strokeLinejoin="round"
-                                                        className="feather feather-corner-down-right p-0.5 p-0.5"
-                                                    >
-                                                        <polyline points="15 10 20 15 15 20" />
-                                                        <path d="M4 4v7a4 4 0 0 0 4 4h12" />
-                                                    </svg>
-                                                </div>
-                                                <div className="side-menu__title">
-                                                    <span className="font-display">Payment Gateway</span>
-                                                </div>
-                                            </a>
-                                        </li>
-                                    </ul>
                                 </li> */}
-                                <li>
 
+                                {/* <li>
                                     <a href="/history/topup" className={`side-menu !pl-5 ${location.pathname === "/history/topup" && 'side-menu--active'}`} >
                                         <div className="side-menu__icon">
                                             <svg
@@ -960,10 +891,9 @@ const Layout = () => {
                                         </div>
                                     </a>
                                     <div className="side-nav__divider my-3" />
+                                </li> */}
 
-                                </li>
-
-                                <li>
+                                {/* <li>
                                     <div className="text-white text-xs font-display py-3">
                                         ข้อมูลสมาชิก
                                     </div>
@@ -1018,9 +948,9 @@ const Layout = () => {
                                         </div>
                                     </a>
                                     <div className="side-nav__divider my-3" />
-                                </li>
+                                </li> */}
 
-                                <li>
+                                {/* <li>
                                     <div className="text-white text-xs font-display py-3">
                                         ข้อมูลพนักงาน
                                     </div>
@@ -1047,34 +977,12 @@ const Layout = () => {
                                             <span className="font-display">รายชื่อพนักงาน</span>
                                         </div>
                                     </a>
-                                    {/* <a href="/staff/logs" className={`side-menu !pl-5 ${location.pathname === "/staff/logs" && 'side-menu--active'}`} >
-                                        <div className="side-menu__icon">
-                                            <svg
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                width="16px"
-                                                height="16px"
-                                                viewBox="0 0 24 24"
-                                                fill="none"
-                                                stroke="currentColor"
-                                                strokeWidth={2}
-                                                strokeLinecap="round"
-                                                strokeLinejoin="round"
-                                                className="feather feather-user-check"
-                                            >
-                                                <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
-                                                <circle cx="8.5" cy={7} r={4} />
-                                                <polyline points="17 11 19 13 23 9" />
-                                            </svg>
-                                        </div>
-                                        <div className="side-menu__title">
-                                            <span className="font-display">ความเคลื่อนไหวพนักงาน</span>
-                                        </div>
-                                    </a> */}
+
                                     <div className="side-nav__divider my-3" />
-                                </li>
+                                </li> */}
 
 
-                                <li>
+                                {/* <li>
                                     <div className="text-white text-xs font-display py-3">
                                         รายงาน
                                     </div>
@@ -1101,9 +1009,9 @@ const Layout = () => {
                                         </div>
                                     </a>
                                     <div className="side-nav__divider my-3" />
-                                </li>
+                                </li> */}
 
-                                <li>
+                                {/* <li>
                                     <div className="text-white text-xs font-display py-3">
                                         ตั้งค่า
                                     </div>
@@ -1131,13 +1039,13 @@ const Layout = () => {
                                         </div>
                                     </a>
                                     <div className="side-nav__divider my-3" />
-                                </li>
+                                </li> */}
                             </ul>
 
                         </nav>
                         <div className="content">
                             <div className="z-10 top-bar justify-end">
-                                <div className="-intro-x breadcrumb mr-auto hidden sm:flex">
+                                {/* <div className="-intro-x breadcrumb mr-auto hidden sm:flex">
                                     <span className="inline-flex items-center">
                                         <a href="/" className="router-link-active underline min-w-max">
                                             หน้าหลัก
@@ -1184,7 +1092,7 @@ const Layout = () => {
                                             <polyline points="9 18 15 12 9 6" />
                                         </svg>
                                     </span>
-                                </div>
+                                </div> */}
 
                                 <div className="pl-2 pr-1 mt-1">
                                     <div className="flex items-center gap-3 min-w-max">
