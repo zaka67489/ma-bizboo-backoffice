@@ -297,6 +297,7 @@ const MemberList = forwardRef((props, ref) => {
     const handleLogoChange = (e) => {
         setNewLogo(e.target.files[0]);
     };
+    
     const handleUploadLogo = async () => {
         if (!newLogo) {
           Swal.fire({

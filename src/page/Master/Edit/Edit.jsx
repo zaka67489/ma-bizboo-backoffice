@@ -2,6 +2,13 @@
 import { useEffect, useState, useRef } from 'react';
 import axios from 'axios';
 import Swal from 'sweetalert2'
+
+
+
+
+
+import EditAdminMasterPage from "./Component/AdminMA";
+import EditMasterPage from "./Component/AdminEV";
 import EditGeneralPage from "./Component/General";
 import EditHistoryPage from "./Component/History";
 import EditCreditPage from "./Component/Credit";
@@ -404,6 +411,56 @@ function MemberList() {
                                             ข้อมูลทั่วไป
                                         </a>
                                     </div>
+                                    <div className="col-span-6 sm:col-span-4">
+                                        <a
+                                            aria-current="page"
+                                            href="#adminmaster"
+                                            // className="router-link-active router-link-exact-active bg-white text-gray-800 w-full lg:w-auto px-3 sm:px-5 py-3 text-center flex justify-center items-center rounded-tl-lg"
+                                            className={`router-link-active router-link-exact-active ${hash === "adminmaster" && 'bg-white text-gray-800'} w-full lg:w-auto px-3 sm:px-5 py-3 text-center flex justify-center items-center rounded-tl-lg`}
+                                        >
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                width="16px"
+                                                height="16px"
+                                                viewBox="0 0 24 24"
+                                                fill="none"
+                                                stroke="currentColor"
+                                                strokeWidth={2}
+                                                strokeLinecap="round"
+                                                strokeLinejoin="round"
+                                                className="feather feather-settings w-4 h-4 mr-2 w-4 h-4 mr-2"
+                                            >
+                                                <circle cx={12} cy={12} r={3} />
+                                                <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z" />
+                                            </svg>{" "}
+                                            จัดการแอดมินเว็บมาสเตอร์
+                                        </a>
+                                    </div>
+                                    <div className="col-span-6 sm:col-span-4">
+                                        <a
+                                            aria-current="page"
+                                            href="#admin"
+                                            // className="router-link-active router-link-exact-active bg-white text-gray-800 w-full lg:w-auto px-3 sm:px-5 py-3 text-center flex justify-center items-center rounded-tl-lg"
+                                            className={`router-link-active router-link-exact-active ${hash === "admin" && 'bg-white text-gray-800'} w-full lg:w-auto px-3 sm:px-5 py-3 text-center flex justify-center items-center rounded-tl-lg`}
+                                        >
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                width="16px"
+                                                height="16px"
+                                                viewBox="0 0 24 24"
+                                                fill="none"
+                                                stroke="currentColor"
+                                                strokeWidth={2}
+                                                strokeLinecap="round"
+                                                strokeLinejoin="round"
+                                                className="feather feather-settings w-4 h-4 mr-2 w-4 h-4 mr-2"
+                                            >
+                                                <circle cx={12} cy={12} r={3} />
+                                                <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z" />
+                                            </svg>{" "}
+                                            จัดการแอดมิน EV
+                                        </a>
+                                    </div>
                                     {/* <div className="col-span-6 sm:col-span-4">
                                         <a
                                             aria-current="page"
@@ -485,13 +542,21 @@ function MemberList() {
                                 </div>
 
                                 {hash === "general" ? <EditGeneralPage accesstoken={accessToken} ref={editGeneralPageRef} datamember={user} onSuccess={getData} /> :
-                                    hash === "history" ? <EditHistoryPage accesstoken={accessToken} /> :
-                                        hash === "credit" ? <EditCreditPage ref={creditPageRef} /> :
-                                            hash === "tx-raw" ? <EditTxrawPage accesstoken={accessToken} /> :
-                                                hash === "affiliate" ? <EditAffiliatePage accesstoken={accessToken} /> :
-                                                    hash === "romotion-status" ? <EditPromotionStatusPage accesstoken={accessToken} /> :
-                                                        hash === "adjust-credit" ? <EditAdjustCreditPage userId={user.userId} ref={adjustCreditPageRef} /> :
-                                                            hash === "bet-history" ? <EditBetHistoryPage /> : null
+                                    hash === "adminmaster" ? <EditAdminMasterPage accesstoken={accessToken} ref={editGeneralPageRef} datamember={user} onSuccess={getData} /> :
+                                        hash === "admin" ? <EditMasterPage accesstoken={accessToken} ref={editGeneralPageRef} datamember={user} onSuccess={getData} /> :
+
+                                    // hash === "adminmaster" ? "กำลังพัฒนา" :
+                                    //     hash === "admin" ? "กำลังพัฒนา" :
+
+
+
+                                            hash === "history" ? <EditHistoryPage accesstoken={accessToken} /> :
+                                                hash === "credit" ? <EditCreditPage ref={creditPageRef} /> :
+                                                    hash === "tx-raw" ? <EditTxrawPage accesstoken={accessToken} /> :
+                                                        hash === "affiliate" ? <EditAffiliatePage accesstoken={accessToken} /> :
+                                                            hash === "romotion-status" ? <EditPromotionStatusPage accesstoken={accessToken} /> :
+                                                                hash === "adjust-credit" ? <EditAdjustCreditPage userId={user.userId} ref={adjustCreditPageRef} /> :
+                                                                    hash === "bet-history" ? <EditBetHistoryPage /> : null
                                 }
                             </div>
                         </div>
