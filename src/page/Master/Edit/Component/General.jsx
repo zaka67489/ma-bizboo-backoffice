@@ -291,6 +291,55 @@ const MemberList = forwardRef((props, ref) => {
         }));
     };
 
+
+    const [newLogo, setNewLogo] = useState(null);
+
+    const handleLogoChange = (e) => {
+        setNewLogo(e.target.files[0]);
+    };
+    const handleUploadLogo = async () => {
+        if (!newLogo) {
+          Swal.fire({
+            title: "แจ้งเตือน",
+            text: "กรุณาเลือกไฟล์โลโก้ก่อน!",
+            icon: "warning",
+          });
+          return;
+        }
+      
+        const formData = new FormData();
+        formData.append("file", newLogo);
+      
+        try {
+          let res = await ApiCall("PUT", `/master-settings/${props.datamember.id}/logo`, formData);
+      
+          if (res.status === "success") {
+            Swal.fire({
+              title: "สำเร็จ",
+              text: "อัปโหลดโลโก้สำเร็จ!",
+              icon: "success",
+            });
+            if (props.onSuccess) {
+              props.onSuccess(); // อัปเดตโลโก้ใหม่ในหน้าจอ
+            }
+          } else {
+            Swal.fire({
+              title: "แจ้งเตือน",
+              text: "ผิดพลาด กรุณาติดต่อแอดมิน",
+              icon: "error",
+            });
+          }
+        } catch (error) {
+          console.error("Error uploading logo:", error);
+          Swal.fire({
+            title: "ข้อผิดพลาด",
+            text: "ไม่สามารถดำเนินการได้ กรุณาลองใหม่อีกครั้ง",
+            icon: "error",
+          });
+        }
+      };
+      
+
     return (
         <div>
             <div className="post__content tab-content">
@@ -362,41 +411,51 @@ const MemberList = forwardRef((props, ref) => {
                                             strokeWidth={2}
                                             strokeLinecap="round"
                                             strokeLinejoin="round"
-                                            className="feather feather-phone w-4 h-4 mr-3 text-white w-4 h-4 mr-3 text-white"
+                                            className="feather feather-image w-4 h-4 mr-3 text-white"
                                         >
-                                            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+                                            <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
+                                            <circle cx="8.5" cy="8.5" r="1.5" />
+                                            <path d="M21 15l-5-5L5 21" />
                                         </svg>{" "}
                                         จัดการโลโก้
                                     </h1>
                                 </div>
                                 <div className="grid grid-cols-12 gap-4 p-4">
                                     <div className="col-span-12">
-
                                         <div className="py-1">
-                                            <label htmlFor="phone" className="form-label">
+                                            <label htmlFor="current-logo" className="form-label">
                                                 โลโก้ปัจจุบัน
                                             </label>
-                                            <img width={140} src={`${API}/${props.datamember.logo}`} />
-
+                                            <img
+                                                id="current-logo"
+                                                width={140}
+                                                src={`${API}/${props.datamember.logo}`}
+                                                alt="Current Logo"
+                                            />
                                         </div>
                                     </div>
-                                    {/* <div className="col-span-12">
+                                    <div className="col-span-12">
                                         <div className="py-1 w-full">
-                                            <div className="flex justify-between">
-                                                <label
-                                                    htmlFor="input-state-3"
-                                                    className="form-label flex items-center"
-                                                >
-                                                    <span className="!pl-1">แก้ไขโลโก้</span>
-
-                                                </label>
-
-                                            </div>
+                                            <label htmlFor="new-logo" className="form-label flex items-center">
+                                                <span className="!pl-1">แก้ไขโลโก้</span>
+                                            </label>
+                                            <input
+                                                id="new-logo"
+                                                type="file"
+                                                accept="image/*"
+                                                onChange={handleLogoChange}
+                                                className="mt-2"
+                                            />
+                                            <button
+                                                onClick={handleUploadLogo}
+                                                className="mt-4 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+                                            >
+                                                อัปโหลดโลโก้ใหม่
+                                            </button>
                                         </div>
-                                    </div> */}
+                                    </div>
                                 </div>
                             </div>
-
                         </div>
                     </div>
                 </div>
