@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from 'react';
 import Swal from 'sweetalert2';
 import { Api } from "@/util/api";
@@ -14,6 +14,8 @@ function generateRandomPassword(length = 8) {
 }
 
 function StaffList() {
+    const { userid } = useParams();
+    const id = userid;
     const [role, setRole] = useState([]);
     const [staffs, setStaffs] = useState([]);
     const [checkboxStates, setCheckboxStates] = useState({});
@@ -23,7 +25,7 @@ function StaffList() {
     const [modalEditStaff, setModalEditStaff] = useState(false);
     const [modalPasswordEditStaff, setModalPasswordEditStaff] = useState(false);
     const [formData, setFormData] = useState({
-        mobilephone: '',
+        username: '',
         pin: generateRandomPassword(),
         name: '',
         lastName: '',
@@ -33,7 +35,7 @@ function StaffList() {
         remark: ''
     });
     const [editFormData, setEditFormData] = useState({
-        mobilephone: '',
+        username: '',
         name: '',
         lastName: '',
         roleId: null
@@ -45,14 +47,14 @@ function StaffList() {
     const navigate = useNavigate();
 
     const fetchRolesData = async () => {
-        let res = await Api("GET", "/staff/roles", {});
+        let res = await Api("GET", "/staff-master/roles", {});
         if (res.status === 'success') {
             setRole(res.roles);
         }
     };
 
     const fetchStaffsData = async () => {
-        let res = await Api("GET", "/staffs", {});
+        let res = await Api("GET", `/master-setting-staffma/${userid}`, {});
         if (res.status === 'success') {
             setStaffs(res.staffs);
         }
@@ -129,14 +131,15 @@ function StaffList() {
     const handleAddStaff = async (e) => {
         e.preventDefault();
         try {
-            let res = await Api("POST", `/staff`, {
-                mobilephone: formData.mobilephone,
+            let res = await Api("POST", `/staff-master-ma`, {
+                username: formData.username,
                 pin: formData.pin,
                 name: formData.name,
                 lastName: formData.name,
                 type: formData.type,
                 roleId: formData.roleId,
-                remark: formData.mobilephone
+                remark: formData.username,
+                MasterSettings_id: Number(id)
             });
             if (res.status === 'success') {
                 fetchStaffsData();
@@ -157,11 +160,47 @@ function StaffList() {
         }
     };
 
+    const handleDeleteMasterStaff = async (staffid) => {
+        // e.preventDefault();
+        Swal.fire({
+            title: "คุณแน่ใจหรือไม่?",
+            text: "คุณต้องการลบพนักงานนี้หรือไม่?",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "ใช่, ลบเลย!",
+            cancelButtonText: "ยกเลิก"
+        }).then(async (result) => {
+            if (result.isConfirmed) {
+                try {
+                    let res = await Api("DELETE", `/staff-master-ma/${staffid}`, {});
+                    if (res.status === 'success') {
+                        fetchStaffsData();
+                        setModaladdStaff(false);
+                        Swal.fire({
+                            title: "แจ้งเตือน!",
+                            text: "ลบพนักงานสำเร็จ",
+                            icon: "success"
+                        });
+                    }
+                } catch (error) {
+                    console.error(error);
+                    Swal.fire({
+                        title: "แจ้งเตือน!",
+                        text: "เกิดข้อผิดพลาดในการลบพนักงาน",
+                        icon: "error"
+                    });
+                }
+            }
+        });
+    };
+
     const handleEditStaff = async (e) => {
         e.preventDefault();
         try {
-            let res = await Api("PATCH", `/staff/${editStaffId}`, {
-                mobilephone: editFormData.mobilephone,
+            let res = await Api("PATCH", `/staff-master/${editStaffId}`, {
+                username: editFormData.username,
                 name: editFormData.name,
                 lastName: editFormData.lastName,
                 roleId: editFormData.roleId
@@ -188,7 +227,7 @@ function StaffList() {
     const handleEditPasswordStaff = async (e) => {
         e.preventDefault();
         try {
-            let res = await Api("PATCH", `/staff/change-pin/${editStaffId}`, {
+            let res = await Api("PATCH", `/staff-master/change-pin/${editStaffId}`, {
                 newPin: formData.password
             });
             if (res.status === 'success') {
@@ -222,7 +261,7 @@ function StaffList() {
     const openEditModal = (data) => {
         setEditStaffId(data.id);
         setEditFormData({
-            mobilephone: data.mobilephone,
+            username: data.username,
             name: data.name,
             lastName: data.lastName,
             roleId: data.roleId
@@ -257,9 +296,6 @@ function StaffList() {
 
     return (
         <div className="py-2">
-            <div className="flex justify-center items-center  text-5xl font-display mr-auto flex items-center text-red-500 uppercase font-bold">
-                กำลังพัฒนา
-            </div>
             <div className="flex mt-[4.7rem] md:mt-0">
                 <div className="content">
                     <div className="grid grid-cols-12 mt-5">
@@ -310,7 +346,7 @@ function StaffList() {
                                                 <line x1={20} y1={8} x2={20} y2={14} />
                                                 <line x1={23} y1={11} x2={17} y2={11} />
                                             </svg>{" "}
-                                            เพิ่มพนักงาน
+                                            เพิ่มแอดมิน MA
                                         </button>
                                     </div>
                                 </div>
@@ -332,9 +368,6 @@ function StaffList() {
                                                 </th>
                                                 <th className="px-2 py-1 border dark:border-dark-5 whitespace-nowrap font-display text-left">
                                                     ชื่อ
-                                                </th>
-                                                <th className="px-2 py-1 border dark:border-dark-5 whitespace-nowrap font-display text-left">
-                                                    เบอร์โทร
                                                 </th>
                                                 <th className="px-2 py-1 border dark:border-dark-5 whitespace-nowrap font-display text-center w-40">
                                                     ล็อกอินล่าสุด
@@ -365,25 +398,22 @@ function StaffList() {
                                                             </div>
                                                         </div>
                                                     </td>
-                                                    <td className="px-2 py-1 border min-w-max">{data.mobilephone}</td>
+                                                    <td className="px-2 py-1 border min-w-max">{data.username}</td>
                                                     <td className="px-2 py-1 border">
                                                         <div className="min-w-max flex justify-center">
-                                                            <span className={`rounded-md text-xs text-white px-2 py-0.5 w-24 text-center block ${getRoleClass(data.StaffRoleRoleNameTh)}`}>
-                                                                {data.StaffRoleRoleNameTh}
+                                                            <span className={`rounded-md text-xs text-white px-2 py-0.5 w-24 text-center block ${getRoleClass(data.MasterStaff_RoleRoleNameTh)}`}>
+                                                                {data.MasterStaff_RoleRoleNameTh}
                                                             </span>
                                                         </div>
                                                     </td>
                                                     <td className="px-2 py-1 border min-w-max">
                                                         <div className="min-w-max">{data.name}</div>
                                                     </td>
-                                                    <td className="px-2 py-1 border min-w-max">
-                                                        <div className="min-w-max">{data.mobilephone}</div>
-                                                    </td>
                                                     <td className="px-2 py-1 border number-display text-center text-xs font-medium text-neutral-500">
-                                                        {data.updateAt}
+                                                        {data.lastLogin}
                                                     </td>
                                                     <td className="px-2 py-1 border number-display text-center text-xs italic text-slate-500">
-                                                        {data.createAt}
+                                                        {data.createdAt}
                                                     </td>
                                                     <td className="px-2 py-1 border">
                                                         <div className="flex items-center w-28">
@@ -435,7 +465,7 @@ function StaffList() {
                                                             <button
                                                                 className="btn btn-danger-soft flex px-2 btn py-1 text-xs"
                                                                 type="button"
-                                                                onClick={() => handleDeleteStaff(data)}
+                                                                onClick={() => handleDeleteMasterStaff(data.id)}
                                                             >
                                                                 <svg
                                                                     xmlns="http://www.w3.org/2000/svg"
@@ -584,7 +614,7 @@ function StaffList() {
                             <div className="modal-content">
                                 <div className="bg-secondary modal-header flex justify-between sticky top-0 rounded-t-md z-50">
                                     <h2 className="font-medium font-display mr-auto text-lg">
-                                        เพิ่มพนักงาน
+                                        เพิ่มแอดมิน MA
                                     </h2>
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
@@ -634,21 +664,21 @@ function StaffList() {
                                                 <div className="py-1 w-full">
                                                     <div className="flex justify-between">
                                                         <label
-                                                            htmlFor="input-mobilephone"
+                                                            htmlFor="input-username"
                                                             className="form-label flex items-center"
                                                         >
                                                             <span className="text-danger">*</span>
-                                                            <span className="!pl-1">เบอร์โทร</span>
+                                                            <span className="!pl-1">username</span>
                                                         </label>
                                                     </div>
                                                     <div className="input-group">
                                                         <input
-                                                            id="input-mobilephone"
+                                                            id="input-username"
                                                             className="z-0 !rounded px-4 intro-x login__input form-control border-gray-300 block focus:outline-none"
-                                                            name="mobilephone"
-                                                            placeholder="เบอร์โทร"
+                                                            name="username"
+                                                            placeholder="username"
                                                             type="text"
-                                                            value={formData.mobilephone}
+                                                            value={formData.username}
                                                             onChange={handleInputChange}
                                                         />
                                                     </div>
@@ -760,7 +790,7 @@ function StaffList() {
                             <div className="modal-content">
                                 <div className="bg-secondary modal-header flex justify-between sticky top-0 rounded-t-md z-50">
                                     <h2 className="font-medium font-display mr-auto text-lg">
-                                        แก้ไขพนักงาน
+                                        แก้ไขพนักงาน MA
                                     </h2>
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
@@ -810,21 +840,21 @@ function StaffList() {
                                                 <div className="py-1 w-full">
                                                     <div className="flex justify-between">
                                                         <label
-                                                            htmlFor="edit-input-mobilephone"
+                                                            htmlFor="edit-input-username"
                                                             className="form-label flex items-center"
                                                         >
                                                             <span className="text-danger">*</span>
-                                                            <span className="!pl-1">เบอร์โทร</span>
+                                                            <span className="!pl-1">username</span>
                                                         </label>
                                                     </div>
                                                     <div className="input-group">
                                                         <input
-                                                            id="edit-input-mobilephone"
+                                                            id="edit-input-username"
                                                             className="z-0 !rounded px-4 intro-x login__input form-control border-gray-300 block focus:outline-none"
-                                                            name="mobilephone"
-                                                            placeholder="เบอร์โทร"
+                                                            name="username"
+                                                            placeholder="username"
                                                             type="text"
-                                                            value={editFormData.mobilephone}
+                                                            value={editFormData.username}
                                                             onChange={handleEditInputChange}
                                                         />
                                                     </div>
@@ -902,7 +932,7 @@ function StaffList() {
                             <div className="modal-content">
                                 <div className="bg-secondary modal-header flex justify-between sticky top-0 rounded-t-md z-50">
                                     <h2 className="font-medium font-display mr-auto text-lg">
-                                        แก้ไขรหัสผ่านพนักงาน
+                                        แก้ไขรหัสผ่านแอดมิน MA
                                     </h2>
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"

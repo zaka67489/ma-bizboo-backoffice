@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from 'react';
 import Swal from 'sweetalert2';
 import { Api } from "@/util/api";
@@ -14,6 +14,8 @@ function generateRandomPassword(length = 8) {
 }
 
 function StaffList() {
+    const { userid } = useParams();
+    const id = userid;
     const [role, setRole] = useState([]);
     const [staffs, setStaffs] = useState([]);
     const [checkboxStates, setCheckboxStates] = useState({});
@@ -52,7 +54,7 @@ function StaffList() {
     };
 
     const fetchStaffsData = async () => {
-        let res = await Api("GET", "/staffs", {});
+        let res = await Api("GET", `/staffs-bymaster/${id}`, {});
         if (res.status === 'success') {
             setStaffs(res.staffs);
         }
@@ -129,14 +131,15 @@ function StaffList() {
     const handleAddStaff = async (e) => {
         e.preventDefault();
         try {
-            let res = await Api("POST", `/staff`, {
+            let res = await Api("POST", `/staff-master`, {
                 mobilephone: formData.mobilephone,
                 pin: formData.pin,
                 name: formData.name,
                 lastName: formData.name,
                 type: formData.type,
                 roleId: formData.roleId,
-                remark: formData.mobilephone
+                remark: formData.mobilephone,
+                MasterSettings_id: Number(id)
             });
             if (res.status === 'success') {
                 fetchStaffsData();
@@ -155,6 +158,42 @@ function StaffList() {
                 icon: "error"
             });
         }
+    };
+  
+    const handleDeleteMasterStaff = async (staffid) => {
+        // e.preventDefault();
+        Swal.fire({
+            title: "คุณแน่ใจหรือไม่?",
+            text: "คุณต้องการลบพนักงานนี้หรือไม่?",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "ใช่, ลบเลย!",
+            cancelButtonText: "ยกเลิก"
+        }).then(async (result) => {
+            if (result.isConfirmed) {
+                try {
+                    let res = await Api("DELETE", `/staff-master/${staffid}`, {});
+                    if (res.status === 'success') {
+                        fetchStaffsData();
+                        setModaladdStaff(false);
+                        Swal.fire({
+                            title: "แจ้งเตือน!",
+                            text: "ลบพนักงานสำเร็จ",
+                            icon: "success"
+                        });
+                    }
+                } catch (error) {
+                    console.error(error);
+                    Swal.fire({
+                        title: "แจ้งเตือน!",
+                        text: "เกิดข้อผิดพลาดในการลบพนักงาน",
+                        icon: "error"
+                    });
+                }
+            }
+        });
     };
 
     const handleEditStaff = async (e) => {
@@ -257,9 +296,6 @@ function StaffList() {
 
     return (
         <div className="py-2">
-        <div className="flex justify-center items-center  text-5xl font-display mr-auto flex items-center text-red-500 uppercase font-bold">
-            กำลังพัฒนา
-        </div>
             <div className="flex mt-[4.7rem] md:mt-0">
                 <div className="content">
                     <div className="grid grid-cols-12 mt-5">
@@ -435,7 +471,7 @@ function StaffList() {
                                                             <button
                                                                 className="btn btn-danger-soft flex px-2 btn py-1 text-xs"
                                                                 type="button"
-                                                                onClick={() => handleDeleteStaff(data)}
+                                                                onClick={() => handleDeleteMasterStaff(data.id)}
                                                             >
                                                                 <svg
                                                                     xmlns="http://www.w3.org/2000/svg"
