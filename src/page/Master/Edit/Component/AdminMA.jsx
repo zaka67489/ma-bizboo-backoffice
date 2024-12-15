@@ -29,7 +29,6 @@ function StaffList() {
         pin: generateRandomPassword(),
         name: '',
         lastName: '',
-        username: '',
         password: generateRandomPassword(),
         roleId: null,
         remark: ''
