@@ -810,8 +810,9 @@ const MasterSettingList = () => {
                                             <circle cx="17" cy="7" r="4" />
                                         </svg>{" "}
                                         รายชื่อเว็บมาสเตอร์ทั้งหมด
-                                    </h2><div className="w-full sm:w-auto flex items-center sm:ml-auto mt-3 sm:mt-0">
-                                        <button
+                                    </h2>
+                                    <div className="w-full sm:w-auto flex items-center sm:ml-auto mt-3 sm:mt-0">
+                                        {JSON.parse(localStorage.getItem('loggedInUser')).userData?.masterSettingsId === null && <button
                                             className="btn bg-green-600 text-white font-display btn btn-md btn-primary"
                                             type="button"
                                             onClick={() => setIsmodalAddUser(true)}
@@ -833,7 +834,8 @@ const MasterSettingList = () => {
                                                 <line x1="9" y1="14" x2="15" y2="14" />
                                             </svg>
                                             <span className="pl-1">เพิ่มเว็บมาสเตอร์</span>
-                                        </button>
+                                        </button>}
+
                                     </div>
 
                                 </div>
