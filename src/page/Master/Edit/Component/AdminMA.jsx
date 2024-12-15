@@ -1,5 +1,6 @@
 import { useNavigate, useParams } from "react-router-dom";
-import { useEffect, useState } from 'react';
+
+import { useEffect, useState, forwardRef, useImperativeHandle } from 'react';
 import Swal from 'sweetalert2';
 import { Api } from "@/util/api";
 import Select from 'react-select';
@@ -13,7 +14,10 @@ function generateRandomPassword(length = 8) {
     return password;
 }
 
-function StaffList() {
+// function StaffList() {
+const StaffList = forwardRef((props, ref) => {
+    console.log('props:', props)
+
     const { userid } = useParams();
     const id = userid;
     const [role, setRole] = useState([]);
@@ -24,12 +28,14 @@ function StaffList() {
     const [modalAddStaff, setModaladdStaff] = useState(false);
     const [modalEditStaff, setModalEditStaff] = useState(false);
     const [modalPasswordEditStaff, setModalPasswordEditStaff] = useState(false);
+    const [randomPin, setRandonpin] = useState(generateRandomPassword());
+    
     const [formData, setFormData] = useState({
         username: '',
-        pin: generateRandomPassword(),
+        pin: randomPin,
         name: '',
         lastName: '',
-        password: generateRandomPassword(),
+        password: randomPin,
         roleId: null,
         remark: ''
     });
@@ -131,8 +137,8 @@ function StaffList() {
         e.preventDefault();
         try {
             let res = await Api("POST", `/staff-master-ma`, {
-                username: formData.username,
-                pin: formData.pin,
+                username: `${formData.username}.${props.datamember.brandcode}`,
+                pin: formData.password,
                 name: formData.name,
                 lastName: formData.name,
                 type: formData.type,
@@ -659,7 +665,7 @@ function StaffList() {
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div className="col-span-12 sm:col-span-6">
+                                            {/* <div className="col-span-12 sm:col-span-6">
                                                 <div className="py-1 w-full">
                                                     <div className="flex justify-between">
                                                         <label
@@ -682,7 +688,30 @@ function StaffList() {
                                                         />
                                                     </div>
                                                 </div>
+                                            </div> */}
+                                            <div className="col-span-12 sm:col-span-6">
+                                                <div className="py-0 w-full">
+                                                    <div className="flex justify-between">
+                                                        <label htmlFor="input-username" className="form-label flex items-center">
+                                                            <span className="text-danger">*</span>
+                                                            <span className="!pl-1">Username</span>
+                                                        </label>
+                                                    </div>
+                                                    <div className="input-group flex items-center border rounded border-gray-300">
+                                                        <input
+                                                            id="input-username"
+                                                            className="z-0 px-4 py-2 intro-x login__input form-control focus:outline-none flex-1"
+                                                            name="username"
+                                                            placeholder="username"
+                                                            type="text"
+                                                            value={formData.username}
+                                                            onChange={handleInputChange}
+                                                        />
+                                                        <span className="px-4 py-2 bg-gray-100 text-gray-500 border-l"> .{props.datamember.brandcode} </span>
+                                                    </div>
+                                                </div>
                                             </div>
+
                                             <div className="col-span-12 sm:col-span-6">
                                                 <div className="py-1 w-full">
                                                     <div className="flex justify-between">
@@ -1032,5 +1061,6 @@ function StaffList() {
         </div>
     );
 }
+)
 
 export default StaffList;
